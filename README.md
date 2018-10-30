@@ -1,1 +1,6 @@
-# discover-func-golang
+# Golang函数探索
+
+## string
+1. 打印字符串中字符个数
+2. 判断字符串是否是 UTF8 文本
+3. 更新字符串
