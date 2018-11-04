@@ -2,27 +2,38 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
-func g() {
-	defer func() {
-		fmt.Println("b")
-		if err := recover(); err != nil {
-			fmt.Println(err)
-		}
-		fmt.Println("d")
-	}()
-	f()
-	fmt.Println("e")
+type Person struct {
+	Name  string
+	Phone string
 }
 
-func f() {
-	fmt.Println("a")
-	panic("a bug occur")
-	fmt.Println("c")
-}
+func mongo() {
+	session, err := mgo.Dial("mongodb://localhost/test")
+	if err != nil {
+		panic(err)
+	}
+	defer session.Close()
 
-func main() {
-	g()
-	fmt.Println("x")
+	// Optional. Switch the session to a monotonic behavior.
+	session.SetMode(mgo.Monotonic, true)
+
+	c := session.DB("test").C("people")
+	err = c.Insert(&Person{"Ale", "+55 53 8116 9639"},
+		&Person{"Cla", "+55 53 8402 8510"})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	result := Person{}
+	err = c.Find(bson.M{"name": "Ale"}).One(&result)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Phone:", result.Phone)
 }
