@@ -90,7 +90,7 @@ func Test_file_write_writestring(t *testing.T) {
 	f.Sync()
 }
 
-//第四种方式:  使用 bufio.NewWriter 写入文件
+//第四种方式:  使用 bufio.NewWriter 写入文件，有缓存的 文件流的读写速度要快很多
 func Test_bufio_newwriter(t *testing.T) {
 	f, err4 := os.Create("./output4") //创建文件
 	if err4 != nil {
