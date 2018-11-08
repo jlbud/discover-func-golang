@@ -109,3 +109,30 @@ func Test_bufio_newwriter(t *testing.T) {
 	w.Flush()
 	f.Close()
 }
+
+// fileName:文件名字(带全路径)
+// content: 写入的内容
+func Test_append_to_file(t *testing.T) {
+	fileName := "output"
+	content := "this is out content"
+	// 以只写的模式，打开文件
+	//O_RDONLY：只读模式(read-only)
+	//O_WRONLY：只写模式(write-only)
+	//O_RDWR：读写模式(read-write)
+	//O_APPEND：追加模式(append)
+	//O_CREATE：文件不存在就创建(create a new file if none exists.)
+	//O_EXCL：与 O_CREATE 一起用，构成一个新建文件的功能，它要求文件必须不存在(used with O_CREATE, file must not exist)
+	//O_SYNC：同步方式打开，即不使用缓存，直接写入硬盘
+	//O_TRUNC：打开并清空文件
+	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE, 0664)
+	if err != nil {
+		fmt.Println("cacheFileList.yml file create failed. err: " + err.Error())
+	} else {
+		// 查找文件末尾的偏移量
+		n, _ := f.Seek(0, os.SEEK_END)
+		// 从末尾的偏移量开始写入内容
+		_, err = f.WriteAt([]byte(content), n)
+		t.Log("write successful")
+	}
+	defer f.Close()
+}
