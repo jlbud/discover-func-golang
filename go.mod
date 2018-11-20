@@ -1,0 +1,1 @@
+module discover-func-golang
