@@ -1,11 +1,11 @@
 package main
 
 import (
-	"testing"
 	"fmt"
-	"unicode/utf8"
 	"strconv"
 	"strings"
+	"testing"
+	"unicode/utf8"
 )
 
 //打印字符串中字符个数
@@ -182,4 +182,13 @@ func Test_slice_to_string(t *testing.T) {
 	sli[4] = "e"
 	resStr := strings.Join(sli, "*")
 	fmt.Println(resStr)
+}
+
+//截取子字符串
+func Test_string_cut(t *testing.T) {
+	var str = `<br/>{"header":}`
+	i := strings.Index(str, `{`)
+	sLen := len(str)
+	subStr := str[i:sLen]
+	fmt.Println(subStr)
 }
