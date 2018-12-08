@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+//================================== Test_chan_equilibrium start
 //用channel实现的负载均衡
 func Test_chan_equilibrium(t *testing.T) {
 	ch := make(chan interface{})
@@ -38,3 +39,19 @@ func b(ch chan interface{}) {
 		}
 	}
 }
+
+//================================== Test_chan_equilibrium end
+
+//================================== Test_returnOnlyReadChan start
+//返回一个只读channel
+func Test_returnOnlyReadChan(t *testing.T) {
+	r := returnOnlyReadChan()
+	fmt.Println(<-r)
+}
+func returnOnlyReadChan() <-chan int {
+	i := make(chan int, 1)
+	i <- 1
+	return i
+}
+
+//================================== Test_returnOnlyReadChan end
