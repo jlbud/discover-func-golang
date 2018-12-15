@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+////////////////////////////////////////// start func接受参数的类型
 //定义接口
 type adder interface {
 	add(string) int
@@ -40,7 +41,7 @@ var my handler = func(name string) int {
 	return len(name)
 }
 
-func Test_func(t *testing.T) {
+func Test_func_parameter(t *testing.T) {
 	//以下是函数或函数方法的调用
 	fmt.Println(my("taozs"))     //调用函数
 	fmt.Println(my.add("taozs")) //调用函数对象的方法
@@ -52,3 +53,58 @@ func Test_func(t *testing.T) {
 	process(handler(doubler)) //因为process接受的参数类型是handler，所以这儿要强制转换
 	process(myint(8))         //实现adder接口不仅可以是函数也可以是结构体
 }
+
+////////////////////////////////////////// end func接受参数的类型
+
+////////////////////////////////////////// start func作为参数转换
+func Test_func_conversion(t *testing.T) {
+	//将language函数转为Man类型
+	m := Man(language)
+	//执行Man类型的一个方法
+	m.action("hello")
+
+	//将run函数转为Man类型
+	r := Man(run)
+	//执行Man类型的一个方法
+	r.action("10")
+}
+
+//声明一个函数类型
+type Man func(name string) string
+
+func (m Man) action(msg string) {
+	s := m(msg) //使用函数
+	fmt.Println(s)
+}
+
+//定义一个函数，格式和type Man相同
+func language(msg string) string {
+	return "say " + msg
+}
+
+//定义一个函数，格式和type Man相同
+func run(speed string) string {
+	return "speed " + speed
+}
+
+////////////////////////////////////////// end func作为参数转换
+
+////////////////////////////////////////// start func作为回调参数
+func Test_func_callback(t *testing.T) {
+	//调用callback函数
+	i := callback(1, 2, addCallBack)
+	fmt.Println(i)
+}
+
+func addCallBack(a, b int) int {
+	return a + b
+}
+
+type Callback func(int, int) int
+
+func callback(x, y int, cb Callback) int {
+	i := cb(x, y)
+	return i
+}
+
+////////////////////////////////////////// end func作为回调参数
