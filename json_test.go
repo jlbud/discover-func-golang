@@ -62,5 +62,17 @@ func Test_map_to_json(t *testing.T) {
 		panic(err)
 	}
 	fmt.Println(string(b))
-
 }
+
+type Topic struct {
+	Topics []string `json:"topics"`
+}
+
+//func Test_a(t *testing.T) {
+//	a := `{"topics":["test","dashboarduser"]}`
+//
+//	t := &Topic{}
+//	json.Unmarshal([]byte(a), t)
+//	t[0]
+//
+//}
