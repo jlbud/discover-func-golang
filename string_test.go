@@ -193,6 +193,12 @@ func Test_string_cut(t *testing.T) {
 	fmt.Println(subStr)
 }
 
+func Test_StringSliceEqualBCE(t *testing.T) {
+	a := []string{"1"}
+	b := []string{"2"}
+	StringSliceEqualBCE(a, b)
+}
+
 // StringSliceEqualBCE use BCE feature to optimize StringSliceEqual
 // 两个[]string是否相等
 func StringSliceEqualBCE(s1, s2 []string) bool {
