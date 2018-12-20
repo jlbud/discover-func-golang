@@ -1,0 +1,4 @@
+# idea编辑器文件
+.idea/
+# io_test生成的文件
+output*
