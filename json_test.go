@@ -68,11 +68,79 @@ type Topic struct {
 	Topics []string `json:"topics"`
 }
 
-//func Test_a(t *testing.T) {
-//	a := `{"topics":["test","dashboarduser"]}`
-//
-//	t := &Topic{}
-//	json.Unmarshal([]byte(a), t)
-//	t[0]
-//
-//}
+func Test_a(t *testing.T) {
+	var a string
+	if a == "" {
+		fmt.Println("a is \"\" ")
+	}
+
+}
+
+type CustomText struct {
+	ID      int64           `json:"id"`
+	Text    string          `json:"text"`
+	Options []*CustomOption `json:"options"`
+}
+
+type CustomOption struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
+	Desc  string `json:"desc"`
+}
+
+func Test_b(t *testing.T) {
+	e := &CustomText{}
+	e.ID = -1
+	e.Text = "关于公司文化，你希望你所在的公司是以下的哪一种呢？"
+
+	var customs []*CustomOption
+
+	c1 := &CustomOption{}
+	c1.Key = "KeyA"
+	c1.Value = "功能型"
+	c1.Desc = "功能型工作文化是指以制度为核心，注重组织中上下级关系，组织的管理者权威性和员工的专业技能的工作文化。"
+	customs = append(customs, c1)
+
+	c2 := &CustomOption{}
+	c2.Key = "KeyB"
+	c2.Value = "流程型"
+	c2.Desc = "流程型工作文化是指公司必须检视各项零散的任务，并整合为一完善的工作流程，再利用团队合作来执行整个工作流程，而达成公司目标。"
+	customs = append(customs, c2)
+
+	c3 := &CustomOption{}
+	c3.Key = "KeyC"
+	c3.Value = "即时型"
+	c3.Desc = "即时型工作文化是指企业先将工作结构设计成专案式的工作型态，再以多技能的员工来执行任务，利用专案成员的专业知识帮助企业不断的创新。"
+	customs = append(customs, c3)
+
+	c4 := &CustomOption{}
+	c4.Key = "KeyD"
+	c4.Value = "网路型"
+	c4.Desc = "网路型工作文化是指由于环境不确定性的增加，企业开始采用策略联盟的方式来降低本身固定成本的投入与风险的承担，并使企业结构更具变动性，透过双方合作来完成特定的任务的工作方式。"
+	customs = append(customs, c4)
+
+	e.Options = customs
+
+	s, err := json.Marshal(e)
+	if err != nil {
+		return
+	}
+	fmt.Println(string(s))
+}
+
+func Test_c(t *testing.T) {
+	var a []string
+	a = append(a, "10")
+
+	b, err := json.Marshal(a)
+	if err != nil {
+		t.Log(err)
+	}
+	c := string(b)
+	t.Log(c)
+
+	var d []string
+	json.Unmarshal(b, &d)
+
+	t.Log(d)
+}
