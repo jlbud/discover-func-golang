@@ -50,6 +50,12 @@ func Test_struct_json(t *testing.T) {
 	// output: {"id":"1","name":"Reds","colors":null}
 }
 
+type Friend struct {
+	Friends []string `json:"friends"`
+	ID      int64    `json:"id"`
+	Name    string   `json:name`
+}
+
 //map to json
 func Test_map_to_json(t *testing.T) {
 	m := map[string]interface{}{
@@ -69,11 +75,10 @@ type Topic struct {
 }
 
 func Test_a(t *testing.T) {
-	var a string
-	if a == "" {
+	var str string
+	if str == "" {
 		fmt.Println("a is \"\" ")
 	}
-
 }
 
 type CustomText struct {
@@ -88,7 +93,7 @@ type CustomOption struct {
 	Desc  string `json:"desc"`
 }
 
-func Test_b(t *testing.T) {
+func Test_aits(t *testing.T) {
 	e := &CustomText{}
 	e.ID = -1
 	e.Text = "关于公司文化，你希望你所在的公司是以下的哪一种呢？"
@@ -129,18 +134,20 @@ func Test_b(t *testing.T) {
 }
 
 func Test_c(t *testing.T) {
-	var a []string
-	a = append(a, "10")
-
-	b, err := json.Marshal(a)
-	if err != nil {
-		t.Log(err)
+	type Empty struct {
+		AA int `json:"a"`
+		BB int `json:"b"`
 	}
-	c := string(b)
-	t.Log(c)
 
-	var d []string
-	json.Unmarshal(b, &d)
+	e := &Empty{
+		AA: 1,
+		BB: 1,
+	}
 
-	t.Log(d)
+	a, _ := json.Marshal(e)
+
+
+	//json.Unmarshal(a,)
+	fmt.Println(string(a))
+
 }
