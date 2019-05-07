@@ -46,7 +46,7 @@ func TestChA(t *testing.T) {
  */
 func TestChB(t *testing.T) {
 	go func() {
-		for i := 0; i < 1000000; i++ {
+		for i := 0; i < 100; i++ {
 			fmt.Println("aaaaaaaaaaaa", "id ", i)
 		}
 		time.Sleep(100 * time.Second)
@@ -67,4 +67,13 @@ func TestChC(t *testing.T) {
 		fmt.Println("this is output")
 	}
 	fmt.Println("end")
+}
+
+func TestChD(t *testing.T) {
+	ch := make(chan int, 3)
+	ch <- 1
+	l := len(ch)
+	c := cap(ch)
+	fmt.Println(l)
+	fmt.Println(c)
 }
