@@ -86,4 +86,7 @@ func Test_basic_map(t *testing.T) {
 		fmt.Println(k, v)
 	}
 
+	// m3的长度
+	l := len(m3)
+	fmt.Println("m3 length is ", l)
 }
