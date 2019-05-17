@@ -51,12 +51,6 @@ func Test_string_to_int64(t *testing.T) {
 	fmt.Println(int64)
 }
 
-// int到string
-func Test_int_to_string(t *testing.T) {
-	string := strconv.Itoa(1)
-	fmt.Println(string)
-}
-
 // int64到string
 func Test_int64_to_string(t *testing.T) {
 	int64 := int64(1234)
