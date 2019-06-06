@@ -90,7 +90,7 @@ func run(speed string) string {
 ////////////////////////////////////////// end func作为参数转换
 
 ////////////////////////////////////////// start func作为回调参数
-func Test_func_callback(t *testing.T) {
+func Test_func_type_callback(t *testing.T) {
 	//调用callback函数
 	i := callback(1, 2, addCallBack)
 	fmt.Println(i)
@@ -108,3 +108,15 @@ func callback(x, y int, cb Callback) int {
 }
 
 ////////////////////////////////////////// end func作为回调参数
+
+func Test_func_callback(t *testing.T) {
+	from(to)
+}
+
+func to(s string) {
+	fmt.Println(s)
+}
+
+func from(to func(s string)) {
+	to("hello")
+}
