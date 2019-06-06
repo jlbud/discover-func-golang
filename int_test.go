@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/big"
+	"strconv"
 	"testing"
 )
 
@@ -25,4 +26,10 @@ func Test_int_to_int32(t *testing.T) {
 	i32 := int32(i)
 	t.Logf("int: %d", i)
 	t.Logf("int32: %d", i32)
+}
+
+// int到string
+func Test_int_to_string(t *testing.T) {
+	string := strconv.Itoa(1)
+	t.Log(string)
 }
