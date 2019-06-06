@@ -48,3 +48,23 @@ func TestTimeNow(t *testing.T) {
 	n := time.Now().Format("2006-01-02 15:04:05")
 	t.Log(n)
 }
+
+func TestMultipleTimeZones(t *testing.T) {
+	now := time.Now()
+	local1, err1 := time.LoadLocation("") // 等同于"UTC"
+	if err1 != nil {
+		fmt.Println(err1)
+	}
+	local2, err2 := time.LoadLocation("Local") // 服务器设置的时区
+	if err2 != nil {
+		fmt.Println(err2)
+	}
+	local3, err3 := time.LoadLocation("America/Los_Angeles") // PDT
+	if err3 != nil {
+		fmt.Println(err3)
+	}
+	// 向东每个时区+1，向西每个时区-1
+	fmt.Println(now.In(local1)) // UTC(Universal Time Coordinated世界协调时间)，又叫做0时区
+	fmt.Println(now.In(local2)) // CST(China Standard Time北京时间)，又叫做东8区
+	fmt.Println(now.In(local3)) // PDT（美国时区），又叫做西8区
+}
