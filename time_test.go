@@ -49,6 +49,7 @@ func TestTimeNow(t *testing.T) {
 	t.Log(n)
 }
 
+// 多时区
 func TestMultipleTimeZones(t *testing.T) {
 	now := time.Now()
 	local1, err1 := time.LoadLocation("") // 等同于"UTC"
@@ -67,4 +68,18 @@ func TestMultipleTimeZones(t *testing.T) {
 	fmt.Println(now.In(local1)) // UTC(Universal Time Coordinated世界协调时间)，又叫做0时区
 	fmt.Println(now.In(local2)) // CST(China Standard Time北京时间)，又叫做东8区
 	fmt.Println(now.In(local3)) // PDT（美国时区），又叫做西8区
+}
+
+// 比较时间大小
+func TestTimeCompare(t *testing.T) {
+	now := time.Now()
+	// 今天10点
+	todayClock := time.Date(now.Year(), now.Month(), now.Day(), 10, 0, 0, 0, now.Location())
+	// 当前时间在今天10点之后
+	b := now.After(todayClock)
+	fmt.Println(b)
+	// 当前时间在今天10点之前
+	b = now.Before(todayClock)
+	fmt.Println(b)
+	return
 }
