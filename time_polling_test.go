@@ -37,10 +37,14 @@ func (dct *DataCollectTimer) createTimer(duration time.Duration) {
 		now := time.Now()
 		// ten o'clock today or tomorrow
 		next := now.Add(duration)
+		// reset rotate every 24 hours if duration is 0
+		if duration == 0 {
+			duration = time.Hour * 24
+		}
 		// ten o'clock
 		next = time.Date(next.Year(), next.Month(), next.Day(), dct.execHourTime, 0, 0, 0, next.Location())
 		t := time.NewTimer(next.Sub(now))
-		fmt.Println(next.Sub(now))
+		fmt.Println("remaining ", next.Sub(now))
 		// set timer
 		<-t.C
 		fmt.Println("do something")
@@ -61,5 +65,5 @@ func TestTimePolling(t *testing.T) {
 		dct.startCollectPlan()
 	}()
 
-	time.Sleep(10 * time.Second)
+	time.Sleep(10 * time.Hour)
 }
