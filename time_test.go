@@ -83,3 +83,8 @@ func TestTimeCompare(t *testing.T) {
 	fmt.Println(b)
 	return
 }
+
+func TestTimeAdd(t *testing.T) {
+	now := time.Now().Add(1 * time.Hour)
+	fmt.Println(now)
+}

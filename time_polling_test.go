@@ -44,7 +44,6 @@ func (dct *DataCollectTimer) createTimer(duration time.Duration) {
 		// set timer
 		<-t.C
 		fmt.Println("do something")
-		break
 	}
 }
 
@@ -64,5 +63,3 @@ func TestTimePolling(t *testing.T) {
 
 	time.Sleep(10 * time.Second)
 }
-
-
