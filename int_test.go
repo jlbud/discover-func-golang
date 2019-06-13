@@ -18,6 +18,7 @@ func Test_string_to_bigint(t *testing.T) {
 func Test_int64_to_bigint(t *testing.T) {
 	limitdate := new(big.Int)
 	limitdate.SetInt64(10)
+	fmt.Println(limitdate)
 }
 
 func Test_int_to_int32(t *testing.T) {
@@ -32,4 +33,17 @@ func Test_int_to_int32(t *testing.T) {
 func Test_int_to_string(t *testing.T) {
 	string := strconv.Itoa(1)
 	t.Log(string)
+}
+
+func Test_max_int(t *testing.T) {
+	var a int
+	a = 1000000000000000000 // int型最多的位数
+	a = 999999999999999999  // int型最大的值
+	b := a % 5
+	t.Log(b)
+}
+
+func Test_int_division(t *testing.T) {
+	result := int(86401 / 86400)
+	t.Log(result)
 }

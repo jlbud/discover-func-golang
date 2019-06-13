@@ -88,3 +88,37 @@ func TestTimeAdd(t *testing.T) {
 	now := time.Now().Add(1 * time.Hour)
 	fmt.Println(now)
 }
+
+func TestTimeSubDays(t *testing.T) {
+	startTime := time.Now()
+	endTime := startTime.Add(48*time.Hour + 1*time.Second)
+	// 结束时间取固定时间10点
+	endTime = time.Date(endTime.Year(), endTime.Month(), endTime.Day(), 10, 0, 0, 0, time.Local)
+	int := timeSubDays(startTime, endTime)
+	t.Log(int)
+}
+
+// 相隔24小时内为一天
+// 相隔非24小时整数，并在结果上加一天
+// 相隔24小时，大于1秒都算多一天
+func timeSubDays(startTime, endTime time.Time) int {
+	subSeconds := endTime.Sub(startTime).Seconds()
+	if subSeconds <= 0 {
+		return 0
+	}
+	// 24小时内算一天
+	if subSeconds > 0 && subSeconds <= 86400 {
+		return 1
+	}
+	// 对一天的总秒数取余数
+	remainder := int(subSeconds) % 86400
+	// 除以一天的总秒数
+	division := int(subSeconds) / 86400
+	// 余数结果是一天的整天数
+	if remainder == 0 {
+		return division
+	} else {
+		// 余数结果大于一天并且非整天数
+		return division + 1
+	}
+}

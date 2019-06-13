@@ -38,8 +38,8 @@ func (dct *DataCollectTimer) createTimer(duration time.Duration) {
 		// ten o'clock today or tomorrow
 		next := now.Add(duration)
 		// reset rotate every 24 hours if duration is 0
-		if duration == 0 {
-			duration = time.Hour * 24
+		if duration == dct.durationFewHours {
+			duration = dct.durationOneDay
 		}
 		// ten o'clock
 		next = time.Date(next.Year(), next.Month(), next.Day(), dct.execHourTime, 0, 0, 0, next.Location())
