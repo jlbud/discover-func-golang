@@ -27,7 +27,7 @@ func Test_is_utf8_str(t *testing.T) {
 // 更新字符串
 func Test_update_str(t *testing.T) {
 	x := "text"
-	xRunes := []rune(x)
+	xRunes := []rune(x)[:2]
 	xRunes[0] = '我'
 	x = string(xRunes)
 	fmt.Println(x) // 我ext

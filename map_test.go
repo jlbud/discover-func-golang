@@ -90,3 +90,15 @@ func Test_basic_map(t *testing.T) {
 	l := len(m3)
 	fmt.Println("m3 length is ", l)
 }
+
+func Test_b_map(t *testing.T) {
+	m1 := make(map[string]string)
+	if m1 == nil {
+		t.Log("m1 is nil")
+	}
+	var m2 map[int]string
+	if m2 == nil {
+		t.Log("m2 is nil")
+		t.Logf("m2 len is %d", len(m2))
+	}
+}

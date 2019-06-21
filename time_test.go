@@ -77,10 +77,10 @@ func TestTimeCompare(t *testing.T) {
 	todayClock := time.Date(now.Year(), now.Month(), now.Day(), 10, 0, 0, 0, now.Location())
 	// 当前时间在今天10点之后
 	b := now.After(todayClock)
-	fmt.Println(b)
+	fmt.Println("在今天10点之后", b)
 	// 当前时间在今天10点之前
 	b = now.Before(todayClock)
-	fmt.Println(b)
+	fmt.Println("在今天10点之前", b)
 	return
 }
 
@@ -120,5 +120,16 @@ func timeSubDays(startTime, endTime time.Time) int {
 	} else {
 		// 余数结果大于一天并且非整天数
 		return division + 1
+	}
+}
+
+func TestTimea(t *testing.T) {
+	now := time.Now()
+	tenClock := time.Date(now.Year(), now.Month(), now.Day(), 10, 0, 0, 0, now.Location())
+	zeroClock := time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 0, now.Location())
+	if now.After(tenClock) && now.Before(zeroClock) {
+		t.Log("true")
+	}else{
+		t.Log("false")
 	}
 }
