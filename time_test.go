@@ -123,13 +123,13 @@ func timeSubDays(startTime, endTime time.Time) int {
 	}
 }
 
-func TestTimea(t *testing.T) {
+func TestTime(t *testing.T) {
 	now := time.Now()
 	tenClock := time.Date(now.Year(), now.Month(), now.Day(), 10, 0, 0, 0, now.Location())
 	zeroClock := time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 0, now.Location())
 	if now.After(tenClock) && now.Before(zeroClock) {
 		t.Log("true")
-	}else{
+	} else {
 		t.Log("false")
 	}
 }
