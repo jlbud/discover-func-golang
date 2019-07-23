@@ -211,3 +211,8 @@ func StringSliceEqualBCE(s1, s2 []string) bool {
 	}
 	return true
 }
+
+func Test_newline(t *testing.T) {
+	str := "new\nline"
+	fmt.Println(str)
+}
