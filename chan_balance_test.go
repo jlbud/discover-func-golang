@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"testing"
+	"time"
 )
 
 //================================== Test_chan_equilibrium start
@@ -14,6 +15,7 @@ func Test_chan_equilibrium(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		ch <- i
 	}
+	time.Sleep(10 * time.Second)
 }
 func a(ch chan interface{}) {
 	count := 0
