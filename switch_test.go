@@ -12,3 +12,11 @@ func TestSwitch(t *testing.T) {
 		fmt.Println("case is: ", v)
 	}
 }
+
+func TestSwitch1(t *testing.T) {
+	switch 1 {
+	case 1, 2:
+	default:
+		fmt.Println("abcd")
+	}
+}
