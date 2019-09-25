@@ -133,7 +133,7 @@ func Test_aits(t *testing.T) {
 	fmt.Println(string(s))
 }
 
-func Test_c(t *testing.T) {
+func TestAJson(t *testing.T) {
 	type Empty struct {
 		AA int `json:"a"`
 		BB int `json:"b"`
@@ -145,9 +145,10 @@ func Test_c(t *testing.T) {
 	}
 
 	a, _ := json.Marshal(e)
-
-
 	//json.Unmarshal(a,)
 	fmt.Println(string(a))
+}
+
+func TestBJson(t *testing.T) {
 
 }

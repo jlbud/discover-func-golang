@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"testing"
 	"time"
 )
@@ -133,3 +134,66 @@ func TestTime(t *testing.T) {
 		t.Log("false")
 	}
 }
+
+func TestTimeStampNow(t *testing.T) {
+	tNow := time.Now().Unix()
+	sNow := strconv.FormatInt(tNow, 10)
+	t.Log(tNow)
+	t.Log(sNow)
+}
+
+////////////////////////////////// 用channel实现定时任务 start
+var mapChan map[int]<-chan time.Time
+
+func TestTimer(t *testing.T) {
+	initTimer()
+	resetDuration(1, time.Second*10)
+	timer1 := time.NewTimer(time.Second * 1)
+	timer2 := time.NewTimer(time.Second * 2)
+	timer3 := time.NewTimer(time.Second * 3)
+
+	quitChan := make(chan bool, 1)
+	quitChan <- true
+	// todo 触发多组定时任务
+	for {
+		startTimer(quitChan, &Timer{TimerID: 1, Timer: timer1})
+		startTimer(quitChan, &Timer{TimerID: 2, Timer: timer2})
+		startTimer(quitChan, &Timer{TimerID: 3, Timer: timer3})
+	}
+	time.Sleep(10 * time.Second)
+}
+
+func initTimer() {
+	// todo 初始化所有未开始的定时器
+	// todo for{}
+}
+
+var timerMap map[int]*time.Timer // todo 需要线程安全
+
+type Timer struct {
+	TimerID int
+	Timer   *time.Timer
+}
+
+func startTimer(quit chan bool, timer *Timer) {
+	timerMap[timer.TimerID] = timer.Timer
+	go func() {
+		select {
+		case <-timer.Timer.C:
+			// todo 检查此任务数据库状态
+			// todo 成功后，至掉数据库状态
+			delete(timerMap, timer.TimerID)
+			break
+		case <-quit:
+			break
+		}
+	}()
+}
+
+func resetDuration(timerID int, duration time.Duration) {
+	if timer, ok := timerMap[timerID]; ok {
+		timer.Reset(duration)
+	}
+}
+
+////////////////////////////////// 用channel实现定时任务 end
