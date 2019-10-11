@@ -134,5 +134,5 @@ func Test_append_to_file(t *testing.T) {
 		_, err = f.WriteAt([]byte(content), n)
 		t.Log("write successful")
 	}
-	defer f.Close() // this is tag v1
+	defer f.Close()
 }
