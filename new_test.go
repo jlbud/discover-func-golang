@@ -29,5 +29,5 @@ func Test_new_b(t *testing.T) {
 	b := &B{
 		b: "b",
 	}
-	t.Log(b.a())
+	t.Log(b.a()) // just test
 }
