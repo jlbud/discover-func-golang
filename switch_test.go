@@ -10,7 +10,9 @@ func TestSwitch(t *testing.T) {
 	switch v {
 	case 1, 5:
 		fmt.Println("case is: ", v)
+		return
 	}
+	fmt.Println("success")
 }
 
 func TestSwitch1(t *testing.T) {
