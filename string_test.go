@@ -216,3 +216,9 @@ func Test_newline(t *testing.T) {
 	str := "new\nline"
 	fmt.Println(str)
 }
+
+func TestStringTrimSuffix(t *testing.T) {
+	s := "Hello world!!!!"
+	ts := strings.TrimSuffix(s, "!!!!")
+	fmt.Printf("%q\n", ts)
+}
