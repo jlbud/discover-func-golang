@@ -1,8 +1,8 @@
-package files
+package main
 
 import "os"
 
-func IsExist(filepath string) bool {
+func IsExistFile(filepath string) bool {
 	_, err := os.Stat(filepath)
 	if err == nil {
 		return true
