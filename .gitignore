@@ -2,3 +2,6 @@
 .idea/
 # io_test生成的文件
 output*
+
+# excel
+*.xlsx
