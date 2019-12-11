@@ -1,4 +1,4 @@
-package github
+package depend_github
 
 import (
 	"fmt"
