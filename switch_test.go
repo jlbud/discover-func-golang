@@ -6,19 +6,12 @@ import (
 )
 
 func TestSwitch(t *testing.T) {
-	v := 1
-	switch v {
-	case 1, 5:
-		fmt.Println("case is: ", v)
-		return
-	}
-	fmt.Println("success")
-}
-
-func TestSwitch1(t *testing.T) {
-	switch 1 {
-	case 1, 2:
+	switch 100 {
+	case 1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14:
+		fmt.Println("employ")
+	case 3, 4:
+		fmt.Println("leader")
 	default:
-		fmt.Println("abcd")
+		fmt.Println("default")
 	}
 }
