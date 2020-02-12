@@ -1,8 +1,28 @@
 package echarts
 
+type Chart struct {
+	ChartOption string
+	Width       string
+	Height      string
+}
+
+const (
+	RadarChartIndex               = 1
+	NegativeHistogramChartIndex   = 2
+	RiskHistogramChartIndex       = 3
+	ProgressBarChartIndex         = 4
+	BrokenLineHistogramChartIndex = 5
+)
+
+var RadarChart = Chart{ChartOption: RadarChartOption, Width: "200", Height: "100"}
+var NegativeHistogramChart = Chart{ChartOption: NegativeHistogramChartOption, Width: "200", Height: "100"}
+var RiskHistogramChart = Chart{ChartOption: RiskHistogramChartOption, Width: "200", Height: "100"}
+var ProgressBarChart = Chart{ChartOption: ProgressBarChartOption, Width: "200", Height: "100"}
+var BrokenLineHistogramChart = Chart{ChartOption: BrokenLineHistogramChartOption, Width: "200", Height: "100"}
+
 // 1
 // 雷达图
-var RadarChart = `{
+var RadarChartOption = `{
     tooltip: {},
     legend: {
         width:10,
@@ -51,7 +71,7 @@ var RadarChart = `{
 // 负数
 // 柱状图
 // "-w", "600", "-h", "250"
-var NegativeHistogramChart = `{
+var NegativeHistogramChartOption = `{
       grid: {
         top: 0,
         bottom: 0,
@@ -134,11 +154,11 @@ var NegativeHistogramChart = `{
 // 3
 // 风险
 // 柱状图
-var RiskHistogramChart = `{
+var RiskHistogramChartOption = `{
     legend: {
         show: true,
         icon: 'circle',
-        data: ['员工平均得分'],
+        data: ['当前得分', '员工平均得分', '绩优者得分'],
         bottom: 16,
         itemWidth: 10,
         itemHeight: 10
@@ -148,17 +168,6 @@ var RiskHistogramChart = `{
         y: 40,
         x2: 60,
         y2: 70
-    },
-    tooltip: {
-        padding: [16, 16],
-        confine: true,
-        trigger: 'axis',
-        backgroundColor: '#fff',
-        textStyle: {
-            color: '#111',
-            fontSize: 12
-        },
-        extraCssText: 'box-shadow:0px4px12px0pxrgba(0,0,0,0.1);text-align:left;border-radius:8px;'
     },
     xAxis: {
         data: ['分裂型', '边缘型', '反社会型', '表演型', '依赖型', '偏执型', '自恋型'],
@@ -175,16 +184,6 @@ var RiskHistogramChart = `{
             interval: 0,
             color: '#111',
             fontWeight: 'bold'
-        },
-        axisPointer: {
-            show: true,
-            type: 'shadow',
-            label: {
-                show: false
-            },
-            shadowStyle: {
-                color: 'rgba(52,76,93,0.03)'
-            }
         }
     },
     yAxis: {
@@ -199,11 +198,6 @@ var RiskHistogramChart = `{
                 opacity: 0.1
             }
         },
-        axisLabel: {
-            textStyle: {
-                color: '#999'
-            }
-        },
         splitLine: {
             lineStyle: {
                 color: '#eee',
@@ -213,27 +207,90 @@ var RiskHistogramChart = `{
     },
     series: [{
         type: 'bar',
-        barWidth: 28.4,
+        barWidth: 20,
+        name: '当前得分',
+        itemStyle: {
+            normal: {
+                barBorderRadius: 2,
+                color: '#A674FF'
+            }
+        },
+        data: ['1.0', '2.0', '3.0', '4.0', '5.0', '6.0', '7.0'],
+        markLine: {
+            silent: true,
+            symbol: 'none',
+            lineStyle: {
+                type: 'dashed'
+            },
+            data: [{
+                lineStyle: {
+                    color: '#00A950'
+                },
+                label: {
+                    formatter: '低风险(<3分)',
+                    lineHeight: 18
+                },
+                yAxis: 3
+            },
+            {
+                lineStyle: {
+                    color: '#F15656'
+                },
+                label: {
+                    formatter: '高风险(>8分)',
+                    lineHeight: 18
+                },
+                yAxis: 8
+            }]
+        }
+    },
+    {
+        type: 'bar',
+        barWidth: 20,
         name: '员工平均得分',
         itemStyle: {
             normal: {
                 barBorderRadius: 2,
-                color: {
-                    x: 0,
-                    y: 0,
-                    x2: 0,
-                    y2: 1,
-                    type: 'linear',
-                    global: false,
-                    colorStops: [{
-                        offset: 0,
-                        color: '#A674FF'
-                    },
-                    {
-                        offset: 1,
-                        color: '#593DFF'
-                    }]
-                }
+                color: '#593DFF'
+            }
+        },
+        data: ['4.0', '9.0', '10.0', '7.0', '7.0', '9.0', '6.0'],
+        markLine: {
+            silent: true,
+            symbol: 'none',
+            lineStyle: {
+                type: 'dashed'
+            },
+            data: [{
+                lineStyle: {
+                    color: '#00A950'
+                },
+                label: {
+                    formatter: '低风险(<3分)',
+                    lineHeight: 18
+                },
+                yAxis: 3
+            },
+            {
+                lineStyle: {
+                    color: '#F15656'
+                },
+                label: {
+                    formatter: '高风险(>8分)',
+                    lineHeight: 18
+                },
+                yAxis: 8
+            }]
+        }
+    },
+    {
+        type: 'bar',
+        barWidth: 20,
+        name: '绩优者得分',
+        itemStyle: {
+            normal: {
+                barBorderRadius: 2,
+                color: '#FFC311'
             }
         },
         data: ['4.0', '9.0', '10.0', '7.0', '7.0', '9.0', '6.0'],
@@ -270,7 +327,7 @@ var RiskHistogramChart = `{
 // 4
 // 进度条
 // "900", "-h", "30"
-var ProgressBarChart = `{
+var ProgressBarChartOption = `{
     tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -354,7 +411,7 @@ var ProgressBarChart = `{
 
 // 5
 // 折线柱状图
-var BrokenLineHistogramChart = `{
+var BrokenLineHistogramChartOption = `{
       grid: {
         top: 30,
         bottom: 0,
