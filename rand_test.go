@@ -14,3 +14,16 @@ func TestRand(t *testing.T) {
 
 	fmt.Println(perm[:5])
 }
+
+func TestRandMinMax(t *testing.T) {
+	for i := 0; i < 100; i++ {
+		i := GenerateRangeNum(24*3600, 7*24*3600)
+		fmt.Println(i)
+	}
+}
+
+func GenerateRangeNum(min, max int) int {
+	rand.Seed(time.Now().Unix())
+	randNum := rand.Intn(max-min) + min
+	return randNum
+}
