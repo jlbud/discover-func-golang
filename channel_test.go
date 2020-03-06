@@ -12,7 +12,7 @@ import (
 再打印aaa
 此时natures <- x 会阻塞
 0 1 4 9 16 ... 9801
- */
+*/
 func TestChA(t *testing.T) {
 	natures := make(chan int)
 	squares := make(chan int)
@@ -43,7 +43,7 @@ func TestChA(t *testing.T) {
 可以测试内存回收
 2秒内真个100万个循环还没有跑完，内存开始疯涨
 但是主线程已经结束掉，但是内存已经跌下来了
- */
+*/
 func TestChB(t *testing.T) {
 	go func() {
 		for i := 0; i < 100; i++ {
@@ -54,17 +54,37 @@ func TestChB(t *testing.T) {
 	time.Sleep(2 * time.Second)
 }
 
-/**
-死锁的测试
-如果缓冲为是0，则发生死锁
-如果缓冲大于0，则正常输出
- */
-func TestChC(t *testing.T) {
-	ch := make(chan int, 1)
-	ch <- 1
-	select {
-	case <-ch:
-		fmt.Println("this is output")
+type ABC struct {
+	A int
+	B int
+}
+
+// 死锁的测试
+// 如果缓冲为是0，则发生死锁
+// 如果缓冲大于0，则正常输出
+// 如果close()，则退出
+func TestChOfClose(t *testing.T) {
+	ch := make(chan ABC, 10)
+	ch1 := make(chan ABC, 10)
+
+	ch <- ABC{A: 1, B: 2}
+	ch <- ABC{A: 4, B: 3}
+	ch <- ABC{A: 2, B: 8}
+	ch <- ABC{A: 2, B: 8}
+	close(ch)
+FOR:
+	for {
+		select {
+		case i, ok := <-ch:
+			fmt.Println(ok)
+			if ok {
+				fmt.Println("this is output:", i.A, i.B, ok)
+			} else {
+				break FOR
+			}
+		case _, ok := <-ch1:
+			fmt.Println(ok)
+		}
 	}
 	fmt.Println("end")
 }
