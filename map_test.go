@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"sync"
 	"testing"
@@ -104,5 +105,151 @@ func Test_b_map(t *testing.T) {
 	if m2 == nil {
 		t.Log("m2 is nil")
 		t.Logf("m2 len is %d", len(m2))
+	}
+}
+
+type StaffCreatesRequest struct {
+	Token string         `json:"token" validate:"required"`
+	List  []StaffCreates `json:"list"`
+}
+
+type StaffCreates struct {
+	Name           string `json:"name" validate:"required"`            // 员工姓名
+	No             string `json:"no" validate:"required"`              // 员工工号
+	Sex            int    `json:"sex" validate:"required"`             // 性别
+	Phone          string `json:"phone"`                               // 手机号
+	Email          string `json:"email" validate:"required"`           // 邮箱
+	DepartmentCode string `json:"department_code" validate:"required"` // 部门编码
+	PositionCode   string `json:"position_code" validate:"required"`   // 岗位编码
+	Position       string `json:"position" validate:"required"`        // 岗位名字
+	RealParentNo   string `json:"real_parent_no"`                      // 直属上级工号
+	InventParentNo string `json:"invent_parent_no"`                    // 虚线上级工号
+	OtherParentNo  string `json:"other_parent_no"`                     // 其他上级工号
+	Status         int    `json:"status" validate:"required"`          // 状态
+	Education      int    `json:"education"`                           // 学历
+	Birthday       string `json:"birthday"`                            // 出生日期
+	WorkedAt       string `json:"worked_at"`                           // 工作时间
+	HiredAt        string `json:"hired_at"`                            // 入职时间
+	ProductIds     string `json:"product_ids"`                         // 产品 IDs
+}
+
+type Staff struct {
+	Status int           // 1: 员工号未入库, 2: 员工号已入库
+	Infor  *StaffCreates //
+}
+
+var jsonS = `{
+                    "token": "4f5f3b9ad2e52808cf3165d612764519",
+                    "list": [
+                        {
+                            "name": "位位",
+                            "no": "wei002",
+                            "sex": 1,
+                            "email": "18268343609@qq.com",
+                            "phone": "18268343609",
+                            "department_code": "s001",
+                            "position": "ssc测试岗",
+                            "position_code": "PS001",
+                            "real_parent_no": "wj004",
+                            "invent_parent_no": "",
+                            "other_parent_no": "",
+                            "status": 2,
+                            "education": 8,
+                            "birthday": "2020-01-01",
+                            "worked_at": "2020-01-01",
+                            "hired_at": "2020-01-01"
+                        },
+                        {
+                            "name":"June",
+                            "no": "wh001",
+                            "sex": 2,
+                            "email": "2495873219@qq.com",
+                            "phone": "18268343601",
+                            "department_code": "d001",
+                            "position": "dhr测试岗",
+                            "position_code": "pd001",
+                            "real_parent_no": "vj001",
+                            "invent_parent_no": "",
+                            "other_parent_no": "",
+                            "status": 2,
+                            "education": 8,
+                            "birthday": "2020-01-01",
+                            "worked_at": "2020-01-01",
+                            "hired_at": "2020-01-01"
+                        },
+                        {
+                            "name": "位娟",
+                            "no": "wj004",
+                            "sex": 1,
+                            "email": "juan.wei@ifchange.com",
+                            "phone": "18268343608",
+                            "department_code": "test001",
+                            "position": "测试岗位",
+                            "position_code": "P01",
+                            "real_parent_no": "172",
+                            "invent_parent_no": "",
+                            "other_parent_no": "",
+                            "status": 2,
+                            "education": 7,
+                            "birthday": "2020-01-01",
+                            "worked_at": "2020-01-01",
+                            "hired_at": "2020-01-01"
+                        },
+                        {
+                            "name": "vickie",
+                            "no": "vj001",
+                            "sex": 1,
+                            "email": "18268343608@163.com",
+                            "phone": "",
+                            "department_code": "d001",
+                            "position": "新增岗位",
+                            "position_code": "PS001",
+                            "real_parent_no": "712",
+                            "invent_parent_no": "",
+                            "other_parent_no": "",
+                            "status": 2,
+                            "education": 7,
+                            "birthday": "2020-01-01",
+                            "worked_at": "2020-01-01",
+                            "hired_at": "2020-01-01"
+                        }
+                    ]
+                }`
+
+func Test_c_map(t *testing.T) {
+	params := &StaffCreatesRequest{}
+	var (
+		staffsMap = make(map[string]Staff, 0)
+	)
+	_ = json.Unmarshal([]byte(jsonS), &params)
+
+	for index := range params.List {
+		staffsMap[params.List[index].No] = Staff{
+			Status: 1,
+			Infor:  &(params.List[index]),
+		}
+	}
+
+	for staffNo := range staffsMap {
+		b, _ := json.Marshal(staffsMap[staffNo].Infor)
+		fmt.Printf("Batch 1, staffNo: %s,staffsMap[staffNo].Infor: %s", staffNo, string(b)) // TODO rm
+		fmt.Println()
+		fmt.Println()
+	}
+
+	abcd(staffsMap)
+	fmt.Println("================")
+	for staffNo := range staffsMap {
+		b, _ := json.Marshal(staffsMap[staffNo].Infor)
+		fmt.Printf("Batch 1, staffNo: %s,staffsMap[staffNo].Infor: %s", staffNo, string(b)) // TODO rm
+		fmt.Println()
+		fmt.Println()
+	}
+}
+
+func abcd(m map[string]Staff) {
+	m["vj001"] = Staff{
+		Status: 2,
+		Infor:  m["vj001"].Infor,
 	}
 }
