@@ -236,7 +236,6 @@ func Test_c_map(t *testing.T) {
 		fmt.Println()
 		fmt.Println()
 	}
-
 	abcd(staffsMap)
 	fmt.Println("================")
 	for staffNo := range staffsMap {
