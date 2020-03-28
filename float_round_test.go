@@ -32,3 +32,9 @@ func Float64Round(f float64, n int) float64 {
 	res, _ := strconv.ParseFloat(fmt.Sprintf(format, f), 64)
 	return res
 }
+
+func TestFloatFixedZeroDigit(t *testing.T) {
+	f := 2.500000
+	fixed, _ := strconv.ParseFloat(fmt.Sprintf("%.1f", f), 64)
+	t.Log(fixed)
+}
