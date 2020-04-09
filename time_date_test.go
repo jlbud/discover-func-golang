@@ -197,3 +197,15 @@ func resetDuration(timerID int, duration time.Duration) {
 }
 
 ////////////////////////////////// 用channel实现定时任务 end
+
+// 特定时间转位固定格式
+func TestTime1(t *testing.T) {
+	tt, _ := time.Parse("2006-01-02 15:04:05", "1989-01-01 00:00:00") //
+	t.Log(tt)
+}
+
+// 当前时间转为固定格式
+func TestTime2(t *testing.T) {
+	s := time.Now().Format("20060102150405")
+	t.Log(s)
+}
