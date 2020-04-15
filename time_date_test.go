@@ -208,4 +208,7 @@ func TestTime1(t *testing.T) {
 func TestTime2(t *testing.T) {
 	s := time.Now().Format("20060102150405")
 	t.Log(s)
+
+	s1 := time.Now().Format("2006.01.02")
+	t.Log(s1)
 }
