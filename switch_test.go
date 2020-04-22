@@ -34,3 +34,13 @@ func TestSwitch1(t *testing.T) {
 		}
 	}
 }
+
+func TestSwitch2(t *testing.T) {
+	for i := 0; i < 50; i++ {
+		if i >= 4 && i <= 14 || i == 21 {
+			t.Log("eligible:", i)
+		}
+	}
+
+	t.Log("success")
+}

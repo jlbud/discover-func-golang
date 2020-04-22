@@ -222,3 +222,10 @@ func TestStringTrimSuffix(t *testing.T) {
 	ts := strings.TrimSuffix(s, "!!!!")
 	fmt.Printf("%q\n", ts)
 }
+
+func TestString1(t *testing.T) {
+	descL := make([]string, 0)
+	descL = append(descL, fmt.Sprintf("%s。", "1"))
+	descL = append(descL, fmt.Sprintf("%s。", "2"))
+	t.Log(strings.Join(descL, ""))
+}

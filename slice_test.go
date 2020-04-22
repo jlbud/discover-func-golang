@@ -39,6 +39,8 @@ func Test_slice_int_array(t *testing.T) {
 	var e []int
 	e = append(e, 1)
 	e = append(e, 2)
+	t.Log("e:", e)
+
 	b, _ := json.Marshal(e)
 
 	err := json.Unmarshal(b, &e)
