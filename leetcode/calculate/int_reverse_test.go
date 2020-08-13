@@ -12,7 +12,11 @@ func TestReverse(t *testing.T) {
 }
 
 /**
-整数反转
+整数反转，
+1、先取出最后一位
+2、原数串剪去最后一位
+3、最后一位不断扩充 *10
+4、原数串变为0，则反转结束
 */
 func reverse(x int) int {
 	ret := 0
@@ -37,7 +41,12 @@ func TestIsPalindrome(t *testing.T) {
 }
 
 /**
-整数是否是回文数
+整数是否是回文数，
+核心反转部分，
+1、先取出最后一位
+2、原数串剪去最后一位
+3、最后一位不断扩充 *10
+4、原数串变为0，则反转结束
 */
 func isPalindrome(x int) bool {
 	// 如果是负数肯定不是
