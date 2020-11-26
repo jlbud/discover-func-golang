@@ -53,7 +53,7 @@ func Test_struct_json(t *testing.T) {
 type Friend struct {
 	Friends []string `json:"friends"`
 	ID      int64    `json:"id"`
-	Name    string   `json:name`
+	Name    string   `json:"name"`
 }
 
 //map to json
