@@ -8,14 +8,16 @@ import (
 	"time"
 )
 
-func TestGroutine1(t *testing.T) {
+func TestGo1(t *testing.T) {
 	t.Log(GetGID())
 	go func() {
+		t.Logf("go: %d", GetGID())
 		t.Logf("go: %d", GetGID())
 	}()
 
 	t.Log(GetGID())
 	go func() {
+		t.Logf("go: %d", GetGID())
 		t.Logf("go: %d", GetGID())
 	}()
 	t.Log(GetGID())

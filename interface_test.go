@@ -22,3 +22,29 @@ func isNil(param interface{}) {
 
 	fmt.Println("this is ok ", a)
 }
+
+var _ O = new(Boy)
+
+type O interface {
+	walk()
+	run()
+}
+type S struct {
+}
+
+func (_ Man) walk() {
+	fmt.Println("walk")
+}
+
+func (_ Man) run() {
+	fmt.Println("run")
+}
+
+type Boy struct {
+	Man
+}
+
+func TestInter1(t *testing.T) {
+	b := new(Boy)
+	b.walk()
+}
