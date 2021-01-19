@@ -98,6 +98,19 @@ func TestChD(t *testing.T) {
 	fmt.Println(c)
 }
 
-func TestChE(t *testing.T) {
+func TestCh1(t *testing.T) {
+	in := make(chan int)
+	go testCh1(in)
+	select {
+	case v := <-in:
+		t.Log(v)
+	case <-time.After(time.Second * 2):
+		t.Log("timeout...")
+	}
+	t.Log("logout...")
+}
 
+func testCh1(in chan int) {
+	time.Sleep(time.Second * 10)
+	in <- 1
 }
