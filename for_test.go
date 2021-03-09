@@ -2,20 +2,22 @@ package main
 
 import (
 	"fmt"
+	"runtime"
+	"sync"
 	"testing"
 	"time"
 )
 
 /**
 用break方式跳出for select循环
- */
+*/
 func TestForBreak(t *testing.T) {
 	i := 0
 LOOP:
 	for {
 		select {
 		case <-time.After(time.Second * time.Duration(2)):
-			i ++
+			i++
 			if i == 5 {
 				fmt.Println("跳出for循环")
 				break LOOP
@@ -28,7 +30,7 @@ LOOP:
 
 /**
 用goto方式跳出for select循环
- */
+*/
 func TestForGoto(t *testing.T) {
 	i := 0
 	for {
@@ -113,4 +115,69 @@ func TestForAssignment(t *testing.T) {
 		intArray1[i]++
 	}
 	fmt.Println("intArray1 is: ", intArray1)
+}
+
+func TestFor1(t *testing.T) {
+	type student struct {
+		Name string
+		Age  int
+	}
+	m := make(map[string]*student)
+	stus := []student{
+		{Name: "zhou", Age: 24},
+		{Name: "li", Age: 23},
+		{Name: "wang", Age: 22},
+	}
+
+	for _, stu := range stus {
+		// 错误打印
+		// &stu指针最终指向的是stus最后一个，
+		// 这样map中每个value的值就会是最后一个
+		m[stu.Name] = &stu
+		// 正确打印
+		//m[stu.Name] = &stus[i]
+		// 打印&stus[i]指针
+		t.Logf("%p", &stu)
+		t.Log(&stu)
+	}
+	for key, value := range m {
+		t.Logf("key=%v,value=%v", key, value)
+	}
+}
+
+func TestFor2(t *testing.T) {
+	pls := [][]string{
+		{"C", "C++"},
+		{"JavaScript"},
+		{"Go", "Rust"},
+	}
+	for _, v1 := range pls {
+		for _, v2 := range v1 {
+			fmt.Printf("%s ", v2)
+		}
+		fmt.Println()
+	}
+}
+
+/**
+for循环，用goroutine打印数组
+*/
+func TestFor3(t *testing.T) {
+	runtime.GOMAXPROCS(1)
+	wg := sync.WaitGroup{}
+	wg.Add(20)
+	for i := 0; i < 10; i++ {
+		go func() {
+			fmt.Println("A: ", i)
+			wg.Done()
+		}()
+	}
+
+	for i := 0; i < 10; i++ {
+		go func(i int) {
+			fmt.Println("B: ", i)
+			wg.Done()
+		}(i)
+	}
+	wg.Wait()
 }

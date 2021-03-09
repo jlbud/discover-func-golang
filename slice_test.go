@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"strings"
 	"testing"
@@ -78,4 +79,33 @@ func TestSlickToArrayString(t *testing.T) {
 	// 把空格转为逗号
 	s1 := strings.Replace(s, " ", ",", -1)
 	t.Log(s1)
+}
+
+func TestSlice1(t *testing.T) {
+	//// 长度预值为5
+	//s := make([]int, 5, 5)
+	// 长度预值为0
+	s := make([]int, 0, 5)
+	s = append(s, 1, 2, 3)
+	t.Log(s)
+	t.Log(len(s))
+}
+
+func doDivision(x, y int) (int, error) {
+	if y == 0 {
+		return 0, errors.New("input is invalid")
+	}
+	return x / y, nil
+}
+
+func TestSlice2(t *testing.T) {
+	i := 2
+	if i > 1 {
+		//  结果输出 1 1
+		//i, _ = doDivision(i, 2)
+		// 结果输出 1 2
+		i, _ := doDivision(i, 2)
+		fmt.Println(i)
+	}
+	fmt.Println(i)
 }
