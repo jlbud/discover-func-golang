@@ -109,3 +109,9 @@ func TestSlice2(t *testing.T) {
 	}
 	fmt.Println(i)
 }
+
+func TestSlice3(t *testing.T) {
+	array_or_slice := []int{1, 2, 3}
+	s := strings.Replace(strings.Trim(fmt.Sprint(array_or_slice), "[]"), " ", ",", -1)
+	t.Log(s)
+}
