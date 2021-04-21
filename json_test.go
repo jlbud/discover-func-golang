@@ -149,6 +149,42 @@ func TestAJson(t *testing.T) {
 	fmt.Println(string(a))
 }
 
-func TestBJson(t *testing.T) {
+func TestMarshal(t *testing.T) {
+	type A struct {
+		A string `json:"a"`
+	}
 
+	a1 := new(A)
+	a1.A = "123"
+	b, _ := json.Marshal(&a1)
+
+	a2 := A{}
+	_ = json.Unmarshal(b, &a2)
+	t.Log(a2)
+}
+
+type BB struct {
+	A string `json:"a"`
+	b bool
+}
+
+func (b *BB) goo() {
+	b.b = true
+	// 如果是结构体，
+	// func(b BB) goo()，此时，goo()和get()变量b的内存地址不同，不可以修改。
+	// 如果是结构体指针
+	// func (b *BB) goo()，此时，goo()和get()变量b的内存地址相同，可以修改。
+	fmt.Println("goo=", &b.b)
+}
+
+func (b *BB) get() bool {
+	fmt.Println("get=", &b.b)
+	return b.b
+}
+
+// 只有结构体指针是可以更改变量值的
+func TestMarshalPointer(t *testing.T) {
+	b := &BB{}
+	b.goo()
+	t.Log(b.get())
 }

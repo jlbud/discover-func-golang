@@ -252,3 +252,12 @@ func abcd(m map[string]Staff) {
 		Infor:  m["vj001"].Infor,
 	}
 }
+
+func TestIsExists(t *testing.T) {
+	maping := map[string]string{"1": "2"}
+	if val, ok := maping["a"]; ok {
+		t.Log(val)
+	} else {
+		t.Error("key not found")
+	}
+}
