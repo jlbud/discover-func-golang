@@ -12,7 +12,6 @@ import (
 
 func index(w http.ResponseWriter, r *http.Request) {
 	reader, _ := r.MultipartReader()
-
 	for {
 		p, err := reader.NextPart()
 		if err == io.EOF {
@@ -20,9 +19,9 @@ func index(w http.ResponseWriter, r *http.Request) {
 			fmt.Println()
 			break
 		}
-		if p == nil {
-			return
-		}
+		//if p == nil {
+		//	return
+		//}
 		key := p.FormName()
 		val, _ := ioutil.ReadAll(p)
 		fmt.Printf("key=%s, value=%s", key, string(val))
@@ -31,7 +30,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 }
 
 // formdata server
-func TestHttpFormataServer(t *testing.T) {
+func TestHttpFormdataServer(t *testing.T) {
 	http.HandleFunc("/china/shanghai", index)
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
