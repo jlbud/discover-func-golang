@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/tidwall/gjson"
 	"testing"
 )
 
@@ -187,4 +188,30 @@ func TestMarshalPointer(t *testing.T) {
 	b := &BB{}
 	b.goo()
 	t.Log(b.get())
+}
+
+func TestDecodeJson(t *testing.T) {
+	type Params struct {
+		Version  string `json:"Version"`
+		Language string `json:"Language"`
+	}
+	j := `{"Version": "2.0.0","Language": "en",}`
+	f := &Params{}
+	_ = json.Unmarshal([]byte(j), f)
+	strArr, _ := ReflectGetFieldName(f)
+	for _, name := range strArr {
+		t.Log(name, "=", gjson.Get(j, name))
+	}
+}
+
+func TestUnmarshalOmitempty(t *testing.T) {
+	type omite struct {
+		A string `json:"a,omitempty"`
+		B string `json:"b"`
+	}
+	j := `{"b":"2"}`
+	o := &omite{}
+	_ = json.Unmarshal([]byte(j), o)
+	b, _ := json.Marshal(o)
+	t.Log(string(b))
 }
