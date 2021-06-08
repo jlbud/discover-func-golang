@@ -47,3 +47,13 @@ func Test_int_division(t *testing.T) {
 	result := int(86401 / 86400)
 	t.Log(result)
 }
+
+func TestInt1(t *testing.T) {
+	str1 := "2"
+	str2 := "1"
+	if str1 < str2 {
+		t.Logf("%s<%s", str1, str2)
+	} else {
+		t.Logf("%s>%s", str1, str2)
+	}
+}

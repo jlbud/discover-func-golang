@@ -104,3 +104,12 @@ func decimal(f float64) float64 {
 		//}
 	}
 }
+
+func TestFloatDefault(t *testing.T) {
+	var f float32
+	if f == 0.0 {
+		t.Logf("the float32 default value is %v", f)
+	} else {
+		t.Logf("the float32 value is %v", f)
+	}
+}

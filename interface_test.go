@@ -48,3 +48,17 @@ func TestInter1(t *testing.T) {
 	b := new(Boy)
 	b.walk()
 }
+
+func TestInter2(t *testing.T) {
+	test(1)
+	test("1")
+}
+
+func test(value interface{}) {
+	val, ok := value.(int)
+	if !ok {
+		fmt.Println(ok)
+	} else {
+		fmt.Println(val)
+	}
+}

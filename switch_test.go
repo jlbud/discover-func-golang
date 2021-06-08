@@ -44,3 +44,25 @@ func TestSwitch2(t *testing.T) {
 
 	t.Log("success")
 }
+
+func TestSwitch3(t *testing.T) {
+	var ScoreCoefficient float32
+	ScoreCoefficient = 1
+	switch "enWordRead" {
+	case "enWordRead",
+		"enSentRead",
+		"enParaRead",
+		"enPhonics",
+		"enSentImit",
+		"enParaImit",
+		"enChoice",
+		"enAskAnswer",
+		"enTopic",
+		"enPict",
+		"enRetell":
+		if ScoreCoefficient == 0 || ScoreCoefficient < 0.6 || ScoreCoefficient > 1.9 {
+			fmt.Println("ScoreCoefficient", ScoreCoefficient)
+		}
+	}
+	fmt.Println("end...")
+}
