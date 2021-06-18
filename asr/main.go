@@ -61,17 +61,6 @@ func main() {
 		//isLastBody := gjson.Get(bufStr, fmt.Sprintf("%d.last_body", i)).Exists()
 		allArr := gjson.Get(bufStr, fmt.Sprintf("%d.allResult", i)).Array()
 
-		//if isLastBody { // last one all result
-		//	all := gjson.Get(bufStr, fmt.Sprintf("%d.last_body", i)).String()
-		//	last := LastText{}
-		//	err := json.Unmarshal([]byte(all), &last)
-		//	if err != nil {
-		//		fmt.Println(fmt.Errorf("LastText json.Unmarshal err %v", err))
-		//		return
-		//	}
-		//	otSli = append(otSli, last.AllResult[0].Text)
-		//	continue
-		//} else
 		if len(allArr) > 0 { // all result
 			v = gjson.Get(bufStr, fmt.Sprintf("%d.allResult.0.text", i))
 		} else { // current result
