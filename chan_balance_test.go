@@ -10,33 +10,29 @@ import (
 //用channel实现的负载均衡
 func Test_chan_equilibrium(t *testing.T) {
 	ch := make(chan interface{})
-	go a(ch)
-	go b(ch)
+	go ch1(ch)
+	go ch2(ch)
 	for i := 0; i < 100; i++ {
 		ch <- i
 	}
 	time.Sleep(10 * time.Second)
 }
-func a(ch chan interface{}) {
-	count := 0
+func ch1(ch chan interface{}) {
 	for {
 		select {
-		case _, ok := <-ch:
+		case v, ok := <-ch:
 			if ok {
-				count ++
-				fmt.Println("a=====", count)
+				fmt.Println("a=====", v)
 			}
 		}
 	}
 }
-func b(ch chan interface{}) {
-	count := 0
+func ch2(ch chan interface{}) {
 	for {
 		select {
-		case _, ok := <-ch:
+		case v, ok := <-ch:
 			if ok {
-				count ++
-				fmt.Println("b=====", count)
+				fmt.Println("b=====", v)
 			}
 		}
 	}

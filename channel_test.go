@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"testing"
 	"time"
@@ -113,4 +114,12 @@ func TestCh1(t *testing.T) {
 func testCh1(in chan int) {
 	time.Sleep(time.Second * 10)
 	in <- 1
+}
+
+func TestCh2(t *testing.T) {
+	ctx, _ := context.WithTimeout(context.Background(), 2*time.Second)
+	select {
+	case <-ctx.Done():
+		t.Log("done")
+	}
 }
