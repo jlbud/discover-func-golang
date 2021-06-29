@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"io"
 	"os"
 	"strings"
@@ -19,7 +20,7 @@ func IsExistFile(filepath string) bool {
 var VowelMapping = map[string]string{}
 
 func TestRead(t *testing.T) {
-	file, err := os.Open("./vowelmapping.txt")
+	file, err := os.Open("./count.txt")
 	if err != nil {
 		t.Error(err)
 	}
@@ -38,6 +39,30 @@ func TestRead(t *testing.T) {
 
 	t.Logf("VowelMapping len=%d", len(VowelMapping))
 	t.Log(VowelMapping["<p:uang4>"])
+}
+
+func TestStatsCount(t *testing.T) {
+	file, _ := os.Open("./count.txt")
+	count, _ := StatsCount(file)
+	t.Log(count)
+}
+
+// statistics file line num
+func StatsCount(r io.Reader) (c int, err error) {
+	// 32K cache
+	buf := make([]byte, 32*1024)
+	count := 1
+	lineSep := []byte{'\n'}
+	for {
+		c, err := r.Read(buf)
+		count += bytes.Count(buf[:c], lineSep)
+		switch {
+		case err == io.EOF:
+			return count, nil
+		case err != nil:
+			return count, err
+		}
+	}
 }
 
 // 根据字节数读取file
