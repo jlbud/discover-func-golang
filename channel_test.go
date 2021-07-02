@@ -123,3 +123,21 @@ func TestCh2(t *testing.T) {
 		t.Log("done")
 	}
 }
+
+// Go gives easier for range loop which will automatically close when the channel is closed.
+func TestCh3(t *testing.T) {
+	fmt.Println("main() func started")
+	c := make(chan int)
+	go s(c)
+	for val := range c {
+		fmt.Println(val)
+	}
+	fmt.Println("main() func stopped")
+}
+
+func s(c chan int) {
+	for i := 0; i < 10; i++ {
+		c <- i
+	}
+	close(c)
+}
