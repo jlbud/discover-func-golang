@@ -61,7 +61,7 @@ func TestLimiter(t *testing.T) {
 	addLimiter("jon", 1)
 
 	li := &limiter{
-		token: "aa",
+		token: "jon",
 	}
 	go func() {
 		err := li.acquire()
