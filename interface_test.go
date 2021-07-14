@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
 )
@@ -61,4 +62,13 @@ func test(value interface{}) {
 	} else {
 		fmt.Println(val)
 	}
+}
+
+func TestInter3(t *testing.T) {
+	m := make(map[string]interface{}, 0)
+	m["line"] = 1
+	var a interface{}
+	a = m
+	b, _ := json.Marshal(a)
+	t.Log(string(b))
 }
