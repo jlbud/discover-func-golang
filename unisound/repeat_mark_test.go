@@ -2,7 +2,6 @@ package unisound
 
 import (
 	"encoding/json"
-	"fmt"
 	"testing"
 )
 
@@ -480,40 +479,120 @@ func addWs2(ws []interface{}) (addWs []interface{}) {
 	//ws = append(ws, m52)
 
 	///////////////
-	m55 := make(map[string]interface{})
-	m55["text"] = "黄"
-	m55["type"] = float64(0)
-	ws = append(ws, m55)
+	//m55 := make(map[string]interface{})
+	//m55["text"] = "黄"
+	//m55["type"] = float64(2)
+	//ws = append(ws, m55)
+	//
+	//m56 := make(map[string]interface{})
+	//m56["text"] = "河"
+	//m56["type"] = float64(2)
+	//ws = append(ws, m56)
+	//
+	//m57 := make(map[string]interface{})
+	//m57["text"] = "黄"
+	//m57["type"] = float64(0)
+	//ws = append(ws, m57)
+	//
+	//m58 := make(map[string]interface{})
+	//m58["text"] = "河"
+	//m58["type"] = float64(0)
+	//ws = append(ws, m58)
+	//
+	//m59 := make(map[string]interface{})
+	//m59["text"] = "入"
+	//m59["type"] = float64(2)
+	//ws = append(ws, m59)
+	//
+	//m60 := make(map[string]interface{})
+	//m60["text"] = "海"
+	//m60["type"] = float64(2)
+	//ws = append(ws, m60)
+	//
+	//m61 := make(map[string]interface{})
+	//m61["text"] = "流"
+	//m61["type"] = float64(2)
+	//ws = append(ws, m61)
 
-	m56 := make(map[string]interface{})
-	m56["text"] = "河"
-	m56["type"] = float64(0)
-	ws = append(ws, m56)
-
-	m57 := make(map[string]interface{})
-	m57["text"] = "黄"
-	m57["type"] = float64(2)
-	ws = append(ws, m57)
-
-	m58 := make(map[string]interface{})
-	m58["text"] = "河"
-	m58["type"] = float64(2)
-	ws = append(ws, m58)
-
-	m59 := make(map[string]interface{})
-	m59["text"] = "入"
-	m59["type"] = float64(2)
-	ws = append(ws, m59)
-
-	m60 := make(map[string]interface{})
-	m60["text"] = "海"
-	m60["type"] = float64(2)
-	ws = append(ws, m60)
-
-	m61 := make(map[string]interface{})
-	m61["text"] = "流"
-	m61["type"] = float64(2)
-	ws = append(ws, m61)
+	//////////////////////////
+	//m62 := make(map[string]interface{})
+	//m62["text"] = "黄"
+	//m62["type"] = float64(2)
+	//ws = append(ws, m62)
+	//
+	//m63 := make(map[string]interface{})
+	//m63["text"] = "河"
+	//m63["type"] = float64(2)
+	//ws = append(ws, m63)
+	//
+	//m64 := make(map[string]interface{})
+	//m64["text"] = "入"
+	//m64["type"] = float64(2)
+	//ws = append(ws, m64)
+	//
+	//m65 := make(map[string]interface{})
+	//m65["text"] = "海"
+	//m65["type"] = float64(2)
+	//ws = append(ws, m65)
+	//
+	//m661 := make(map[string]interface{})
+	//m661["text"] = "流"
+	//m661["type"] = float64(2)
+	//ws = append(ws, m661)
+	//
+	//m66 := make(map[string]interface{})
+	//m66["text"] = "黄"
+	//m66["type"] = float64(0)
+	//ws = append(ws, m66)
+	//
+	//m67 := make(map[string]interface{})
+	//m67["text"] = "河"
+	//m67["type"] = float64(0)
+	//ws = append(ws, m67)
+	//
+	//m68 := make(map[string]interface{})
+	//m68["text"] = "入"
+	//m68["type"] = float64(0)
+	//ws = append(ws, m68)
+	//
+	//m69 := make(map[string]interface{})
+	//m69["text"] = "海"
+	//m69["type"] = float64(0)
+	//ws = append(ws, m69)
+	//
+	//m70 := make(map[string]interface{})
+	//m70["text"] = "流"
+	//m70["type"] = float64(0)
+	//ws = append(ws, m70)
+	////////////////////////
+	m71 := make(map[string]interface{})
+	m71["text"] = "黄"
+	m71["type"] = float64(2)
+	ws = append(ws, m71)
+	m72 := make(map[string]interface{})
+	m72["text"] = "河"
+	m72["type"] = float64(2)
+	ws = append(ws, m72)
+	m73 := make(map[string]interface{})
+	m73["text"] = "入"
+	m73["type"] = float64(2)
+	ws = append(ws, m73)
+	m74 := make(map[string]interface{})
+	m74["text"] = "海"
+	m74["type"] = float64(2)
+	ws = append(ws, m74)
+	m75 := make(map[string]interface{})
+	m75["text"] = "流"
+	m75["type"] = float64(2)
+	ws = append(ws, m75)
+	m76 := make(map[string]interface{})
+	m76["text"] = "流"
+	m76["type"] = float64(0)
+	ws = append(ws, m76)
+	m77 := make(map[string]interface{})
+	m77["text"] = "流"
+	m77["type"] = float64(0)
+	ws = append(ws, m77)
 	return ws
 }
 
@@ -552,8 +631,7 @@ func markSameZeroSli(zeroSliCache []interface{}, normalSliCache []interface{}) (
 	zeroSame := isSameSli(zeroSliCache)
 	if zeroSame {
 		wordZ := zeroSliCache[0].(map[string]interface{})
-		wordN := normalSliCache[0].(map[string]interface{})
-		fmt.Println("len is ", len(normalSliCache))
+		wordN := normalSliCache[len(normalSliCache)-1].(map[string]interface{})
 		txtZ := wordZ["text"]
 		txtN := wordN["text"]
 		if txtZ == txtN {
@@ -577,7 +655,7 @@ func markRepeat(ws []interface{}) (markWs []interface{}, markNum uint32) {
 		word := ws[j].(map[string]interface{})
 		ty := word["type"].(float64)
 		switch ty {
-		case 0:
+		case 2:
 			// pre mark not repeat
 			word["repeat"] = 0
 			// 0 0 0 2 0
@@ -587,15 +665,15 @@ func markRepeat(ws []interface{}) (markWs []interface{}, markNum uint32) {
 				zeroSliCache = zeroSliCache[:0]
 				normalSliCache = normalSliCache[:0]
 			}
-			zeroSliCache = append(zeroSliCache, ws[j]) // 0 0 0
-		case 2:
+			normalSliCache = append(normalSliCache, ws[j]) // 0 0 0
+		case 0:
 			// pre mark not repeat
 			word["repeat"] = 0
 			// first increase zeroSliCache
-			if len(zeroSliCache) == 0 {
+			if len(normalSliCache) == 0 {
 				continue
 			}
-			normalSliCache = append(normalSliCache, ws[j])
+			zeroSliCache = append(zeroSliCache, ws[j])
 			nLen := len(normalSliCache)
 			zLen := len(zeroSliCache)
 			// not equal and not last one
