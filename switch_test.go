@@ -66,3 +66,23 @@ func TestSwitch3(t *testing.T) {
 	}
 	fmt.Println("end...")
 }
+
+func TestSwitch4(t *testing.T) {
+	type A1 struct {
+		a string
+	}
+	type A2 struct {
+		a string
+	}
+	var v interface{}
+	v = &A1{}
+	//v = A1{}
+	switch v.(type) {
+	case *A1:
+		fmt.Println("A1")
+	case *A2:
+		fmt.Println("A2")
+	default:
+		fmt.Println("default")
+	}
+}
