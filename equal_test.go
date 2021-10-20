@@ -1,10 +1,10 @@
 package main
 
 import (
-	"testing"
+	"bytes"
 	"fmt"
 	"reflect"
-	"bytes"
+	"testing"
 )
 
 type data struct {
@@ -39,4 +39,3 @@ func Test_bytes_equsl(t *testing.T) {
 	// nil 与 slice 在字节上是相同的
 	fmt.Println("b1 == b2: ", bytes.Equal(b1, b2)) // true
 }
-
