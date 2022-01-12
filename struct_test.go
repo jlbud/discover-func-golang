@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"testing"
 )
 
@@ -20,4 +21,29 @@ func TestS1(t *testing.T) {
 	p := &Product{}
 	_ = json.Unmarshal([]byte(data), p)
 	fmt.Println(*p)
+}
+
+func TestStructValidator(t *testing.T) {
+	v := struct {
+		A string `must:"true"`
+		B string `must:"false"`
+	}{
+		A: "a",
+	}
+	err := validator(&v) // must be input pointer
+	if err != nil {
+		t.Fatalf("error: %v", err)
+	}
+	t.Log("success")
+}
+
+func validator(i interface{}) error {
+	val := reflect.ValueOf(i).Elem() // get all fields value
+	ty := reflect.TypeOf(i).Elem()   // get all fields type
+	for i := 0; i < ty.NumField(); i++ {
+		if ty.Field(i).Tag.Get("must") == "true" && val.Field(i).IsZero() {
+			return fmt.Errorf("<%v> not be empty", ty.Field(i).Name)
+		}
+	}
+	return nil
 }
