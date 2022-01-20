@@ -1,14 +1,12 @@
-# Golang函数探索
+# Golang function exploration
 
-## 字符串
-1. 打印字符串中字符个数
-2. 判断字符串是否是 UTF8 文本
-3. 更新字符串
+## String
+1. Print character number of string.
+2. Checks if the string is UTF-8 text.
+3. Update string content.
 
-## 相等判断
-1. 比较两个结构体是否相等，因为有无法比较的字段在
-2. 字节比较
+## Equivalence judgment
+1. Two structures
+2. Bytes
 
-## 数字
-1. string转大整数
-2. int64转大整数
+## Digital
