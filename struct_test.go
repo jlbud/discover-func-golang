@@ -2,8 +2,10 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"reflect"
+	"strconv"
 	"testing"
 )
 
@@ -47,3 +49,34 @@ func validator(i interface{}) error {
 	}
 	return nil
 }
+
+//////////////////////////////// reset int type of field value
+type OverwriteInt struct {
+	Age CheckInt `json:"age,string"`
+}
+
+type CheckInt int
+
+func (ci *CheckInt) UnmarshalJSON(b []byte) error {
+	nS := string(b)
+	n, err := strconv.ParseInt(nS, 10, 0)
+	if err != nil {
+		return err
+	}
+	if n > 100 {
+		return errors.New("Age input error. ")
+	}
+	*ci = CheckInt(n)
+	return nil
+}
+
+func TestOverwriteInt(t *testing.T) {
+	j := `{"age":"200"}`
+	o := OverwriteInt{}
+	if err := json.Unmarshal([]byte(j), &o); err != nil {
+		t.Fatal(err)
+	}
+	t.Log(o.Age)
+}
+
+////////////////////////////////
