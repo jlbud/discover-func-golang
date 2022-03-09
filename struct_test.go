@@ -50,7 +50,7 @@ func validator(i interface{}) error {
 	return nil
 }
 
-//////////////////////////////// reset int type of field value
+//////////////////////////////// Overwrite int type of field value
 type OverwriteInt struct {
 	Age CheckInt `json:"age,string"`
 }
