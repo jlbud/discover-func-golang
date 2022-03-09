@@ -7,7 +7,7 @@ import (
 )
 
 // go 1.16 speciality
-//go:embed embed.txt
+//go:embed tmp/embed.txt
 var str string
 
 func TestEmbed(t *testing.T) {

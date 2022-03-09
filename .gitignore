@@ -6,3 +6,4 @@ output*
 # excel
 *.xlsx
 *.txt
+tmp/
