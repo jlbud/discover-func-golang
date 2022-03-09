@@ -78,7 +78,7 @@ func TestReadFile(t *testing.T) {
 	}
 }
 
-////////////////////
+//////////////////// Write data to file.
 func TestDataWriter(t *testing.T) {
 	file, err := os.OpenFile("./tmp/writer.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
