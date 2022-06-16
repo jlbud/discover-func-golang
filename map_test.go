@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"sync"
 	"testing"
@@ -260,4 +261,139 @@ func TestIsExists(t *testing.T) {
 	} else {
 		t.Error("key not found")
 	}
+}
+
+func TestMapMemory(t *testing.T) {
+	var m map[int]int
+	mdMap(m)
+	fmt.Println(m) // the map is nil
+}
+func mdMap(m map[int]int) {
+	fmt.Println(m) // the map is nil
+	m = make(map[int]int)
+	m[1] = 100
+	m[2] = 200
+	fmt.Println(m) // point new memory location so has new map
+}
+
+var t1 = `{
+    "lines": [
+        {
+            "end": 1.041,
+            "fluency": 0.11,
+            "integrity": 9,
+            "pronunciation": 19.22,
+            "score": 78.99,
+            "speeding": 2,
+            "standardScore": 99.1,
+            "words": [
+                {
+                    "score": 3.917,
+                    "subwords": [
+                        {
+                            "score": 50.0
+                        }
+                    ]
+                },
+                {
+                    "score": 1.22,
+                    "subwords": [
+                        {
+                            "begin": 0.411,
+                            "score": 60.0
+                        },
+                        {
+                            "score": 60.0
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}`
+
+func TestMapResetZero(t *testing.T) {
+	b, err := resetZeroByMode("G", t1)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	t.Log(string(b))
+}
+func resetZeroByMode(mode, s string) (string, error) {
+	switch mode {
+	case "A", "B", "C", "D", "E", "H", "G":
+		return resetLinesWords(mode, s)
+	default:
+		return "", errors.New("resetZero mode not match")
+	}
+}
+func resetLinesWords(mode string, s string) (string, error) {
+	var result map[string]interface{}
+	err := json.Unmarshal([]byte(s), &result)
+	if err != nil {
+		return "", err
+	}
+	// return if not found field 'lines'
+	if _, ok := result["lines"]; !ok {
+		return s, nil
+	}
+	lines := result["lines"].([]interface{})
+	for _, line := range lines {
+		l := line.(map[string]interface{})
+		if _, ok := l["fluency"]; ok {
+			l["fluency"] = 0
+		}
+		if _, ok := l["integrity"]; ok {
+			l["integrity"] = 0
+		}
+		if _, ok := l["pronunciation"]; ok {
+			l["pronunciation"] = 0
+		}
+		if _, ok := l["score"]; ok {
+			l["score"] = 0
+		}
+		if _, ok := l["speeding"]; ok {
+			l["speeding"] = 1
+		}
+		if _, ok := l["standardScore"]; ok {
+			l["standardScore"] = 0
+		}
+		// reset other fields in this place
+		// ...
+		// continue if not found field 'words'
+		if _, ok := l["words"]; !ok {
+			continue
+		}
+		words := l["words"].([]interface{})
+		for _, word := range words {
+			w := word.(map[string]interface{})
+			if _, ok := w["score"]; ok {
+				w["score"] = 0
+			}
+			if mode == "E" || mode == "H" || mode == "G" {
+				// reset other fields in this place
+				// ...
+				//continue if not found field 'subwords'
+				if _, ok := w["subwords"]; !ok {
+					continue
+				}
+				subwords := w["subwords"].([]interface{})
+				for _, subword := range subwords {
+					sw := subword.(map[string]interface{})
+					if _, ok := sw["score"]; ok {
+						sw["score"] = 0
+					}
+				}
+			}
+		}
+	}
+	return resultMar(result)
+}
+func resultMar(result map[string]interface{}) (string, error) {
+	b, err := json.Marshal(result)
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
 }
