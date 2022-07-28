@@ -10,7 +10,7 @@ import (
 func Test_panic_order(t *testing.T) {
 	defer func() {
 		if err := recover(); err != nil {
-			t.Error(fmt.Errorf("err log: %v", err))
+			t.Error(fmt.Errorf("two err log: %v", err))
 		}
 	}()
 

@@ -80,3 +80,19 @@ func TestOverwriteInt(t *testing.T) {
 }
 
 ////////////////////////////////
+
+type P struct {
+	Id   int    `json:"id"`
+	Name string `json:"name"`
+}
+
+func (p P) String() string {
+	return fmt.Sprintf("Id:%d, Name:%s", p.Id, p.Name)
+}
+func TestOverrideString(t *testing.T) {
+	p := P{
+		Id:   100,
+		Name: "abcd",
+	}
+	fmt.Println(p)
+}

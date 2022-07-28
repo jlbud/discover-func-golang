@@ -229,3 +229,10 @@ func TestString1(t *testing.T) {
 	descL = append(descL, fmt.Sprintf("%s。", "2"))
 	t.Log(strings.Join(descL, ""))
 }
+
+// Output 'a' ascii code
+func TestString2(t *testing.T) {
+	a := "a"
+	b := a[len(a)-1]
+	t.Log(b)
+}
