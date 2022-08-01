@@ -57,3 +57,8 @@ func TestInt1(t *testing.T) {
 		t.Logf("%s>%s", str1, str2)
 	}
 }
+
+func TestInt2(t *testing.T) {
+	a := 1 << 20 // 1048576
+	fmt.Println(a)
+}
