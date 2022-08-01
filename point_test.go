@@ -47,3 +47,11 @@ func s(p *In, sy *sync.WaitGroup) {
 		fmt.Println(p.I)
 	}
 }
+
+func TestPointer3(t *testing.T) {
+	type S struct {
+		I int
+	}
+	var s *S
+	fmt.Printf("%p", &s)
+}
