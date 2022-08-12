@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Web Tools Platform(WTP)</title>
+</head>
+<h1>工具平台</h1>
+<body>
+<form style="margin:10px" method="POST" action="/upload/audios" enctype="multipart/form-data">
+    选择转码音频：
+    <input style="margin-bottom:10px" name="audio_name" type="file"/><br>
+    输入格式：
+    <select style="margin-bottom:10px" name="in_format">
+        <option value="mp3">mp3</option>
+        <option value="aac">aac</option>
+        <option value="adpcm">adpcm</option>
+        <option value="amr">amr</option>
+        <option value="amrnb">amrnb</option>
+        <option value="m4a">m4a</option>
+        <option value="ogg">ogg</option>
+        <option value="opus">opus</option>
+        <option value="hwopus">hwopus</option>
+        <option value="pcma">pcma</option>
+        <option value="pcmu">pcmu</option>
+        <option value="silk">silk</option>
+        <option value="speex">speex</option>
+        <option value="stdopus">stdopus</option>
+        <option value="stdspeex">stdspeex</option>
+        <option value="pcm">pcm</option>
+        <option value="wav">wav</option>
+    </select>
+    输入采样率：
+    <select style="margin-bottom:10px" name="in_rate">
+        <option value="32000">32000</option>
+        <option value="16000">16000</option>
+        <option value="8000">8000</option>
+        <option value="44100">44100</option>
+    </select><br>
+    输出格式：
+    <select style="margin-bottom:10px" name="out_format">
+        <option value="mp3">mp3</option>
+        <option value="aac">aac</option>
+        <option value="adpcm">adpcm</option>
+        <option value="amr">amr</option>
+        <option value="amrnb">amrnb</option>
+        <option value="m4a">m4a</option>
+        <option value="ogg">ogg</option>
+        <option value="opus">opus</option>
+        <option value="hwopus">hwopus</option>
+        <option value="pcma">pcma</option>
+        <option value="pcmu">pcmu</option>
+        <option value="silk">silk</option>
+        <option value="speex">speex</option>
+        <option value="stdopus">stdopus</option>
+        <option value="stdspeex">stdspeex</option>
+        <option value="pcm">pcm</option>
+        <option value="wav">wav</option>
+    </select>
+    输出采样率：
+    <select style="margin-bottom:10px" name="out_rate">
+        <option value="16000">16000</option>
+        <option value="8000">8000</option>
+    </select><br>
+    <input type="submit" value="开始转码"/>
+</form>
+</body>
+</html>
+
+
