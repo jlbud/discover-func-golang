@@ -54,3 +54,15 @@ func timeMiddleWare(next http.Handler) http.Handler {
 		fmt.Println(timeE)
 	})
 }
+
+func TestHttpListen2Port(t *testing.T) {
+	go func() {
+		http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {})
+		http.ListenAndServe("0.0.0.0:8081", nil)
+	}()
+
+	http.HandleFunc("/hello", func(w http.ResponseWriter, req *http.Request) {
+		w.Write([]byte("hello"))
+	})
+	http.ListenAndServe(":8080", nil)
+}
