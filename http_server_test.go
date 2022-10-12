@@ -45,7 +45,6 @@ func middleWareWorld(wr http.ResponseWriter, r *http.Request) {
 
 // 中间件通过包装handler再返回一个新的handler
 func timeMiddleWare(next http.Handler) http.Handler {
-	// TODO 没明白
 	return http.HandlerFunc(func(wr http.ResponseWriter, r *http.Request) {
 		// 中间件做了打印时间的事情
 		timS := time.Now()
