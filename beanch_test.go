@@ -20,7 +20,7 @@ func BenchmarkBuilderWrite(b *testing.B) {
 	}
 }
 
-func BenchmarkBuiderWriteByte(b *testing.B) {
+func BenchmarkBuilderWriteByte(b *testing.B) {
 	var builder strings.Builder
 	for i := 0; i < b.N; i++ {
 		builder.WriteByte(bt)
