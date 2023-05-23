@@ -28,7 +28,7 @@ func (o *Once) do(f func()) {
 	}
 }
 
-//sync.once 利用原子特性的单例(单次执行)实现
+// sync.once 利用原子特性的单例(单次执行)实现
 func Test_justDoOnce(t *testing.T) {
 	o := &Once{}
 	go o.do(func() { fmt.Println("do once") })
